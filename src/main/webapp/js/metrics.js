@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* global jQuery, echarts, metrics, metricsTree */
 (function ($) {
     var maxLOC = Math.max(...metrics.map(d => d.metrics.LOC));
@@ -14,6 +15,47 @@
         }
         return hash;
     }
+=======
+/* global jQuery, echarts, metrics, metricsTree, math */
+(function ($) {
+    var maxLOC = Math.max(...metrics.map(d => d.metrics.LOC));
+    var childTables = {};
+    var columnsVisible = {};
+    var visibleColumns = [];
+
+    $.fn.dataTable.ext.search.push(
+        function (settings, rawData, dataIndex) {
+            var data = {
+                ATFD: rawData[3],
+                CLASS_FAN_OUT: rawData[4],
+                LOC: rawData[5],
+                NCSS: rawData[6],
+                NOAM: rawData[7],
+                NOPA: rawData[8],
+                TCC: rawData[9],
+                WMC: rawData[10],
+                WOC: rawData[11],
+                ISSUES: rawData[12]
+            };
+
+            var filter = $('#table-filter').val() || 'true';
+            return math.evaluate(filter, data);
+        }
+    );
+
+    $.fn.dataTable.Api.registerPlural('columns().names()', 'column().name()', function (setter) {
+        return this.iterator('column', function (settings, column) {
+            var col = settings.aoColumns[column];
+
+            if (setter !== undefined) {
+                col.sName = setter;
+                return this;
+            } else {
+                return col.sName;
+            }
+        }, 1);
+    });
+>>>>>>> a18675184... metrics analysis
 
     $(document).ready(function () {
         var table = $('#lines-of-code').DataTable({
@@ -81,6 +123,14 @@
                     name: 'metrics.WOC',
                     defaultContent: '',
                     render: $.fn.dataTable.render.number(',', '.', 2)
+<<<<<<< HEAD
+=======
+                },
+                {
+                    data: 'metrics.ISSUES',
+                    name: 'metrics.ISSUES',
+                    defaultContent: ''
+>>>>>>> a18675184... metrics analysis
                 }
             ],
             columnDefs: [
@@ -98,6 +148,13 @@
             ]
         });
 
+<<<<<<< HEAD
+=======
+        $('#table-filter').keyup(function () {
+            table.draw();
+        });
+
+>>>>>>> a18675184... metrics analysis
         // Add event listener for opening and closing details
         $('#lines-of-code tbody').on('click', 'div.details-control', function () {
             var tr = $(this).closest('tr');
@@ -108,7 +165,11 @@
                 row.child.hide();
                 tr.removeClass('shown');
 
+<<<<<<< HEAD
                 delete childRows[row.index()];
+=======
+                delete childTables[row.index()];
+>>>>>>> a18675184... metrics analysis
             } else {
                 // Open this row
                 var child = '<table id="lines-of-code_' + row.index() + '" class="ml-5">' +
@@ -122,7 +183,11 @@
                 row.child(child).show();
                 tr.addClass('shown');
 
+<<<<<<< HEAD
                 childRows[row.index()] = $('#lines-of-code_' + row.index()).DataTable({
+=======
+                childTables[row.index()] = $('#lines-of-code_' + row.index()).DataTable({
+>>>>>>> a18675184... metrics analysis
                     info: false,
                     paging: false,
                     searching: false,
@@ -148,6 +213,7 @@
         });
 
         // toggle column visibility
+<<<<<<< HEAD
         $('input.column-toggle').on('click', function (e) {
             var columnName = $(this).attr('data-column-id') + ':name';
 
@@ -157,6 +223,29 @@
 
             Object.values(childRows)
                 .forEach(childRow => childRow.column(columnName).visible(e.target.checked));
+=======
+        function changeVisibility() {
+            if (this.name() === '' || this.name() === 'packageName' || this.name() === 'className') {
+                return;
+            }
+
+            if (this.visible() && visibleColumns.indexOf(this.name()) <= -1) {
+                this.visible(false);
+            } else if (!this.visible() && visibleColumns.indexOf(this.name()) > -1) {
+                this.visible(true);
+            }
+        }
+
+        $('#column-picker').on('changed.bs.select', function (e, _clickedIndex, _isSelected, _previousValue) {
+            visibleColumns = $(e.target).val();
+
+            // change visibilities in main table
+            table.columns().every(changeVisibility);
+
+            // change visibilities in child tables
+            Object.values(childTables)
+                .forEach(childTable => childTable.columns().every(changeVisibility));
+>>>>>>> a18675184... metrics analysis
         });
 
         /* ------------------------------------------------------------------------------
@@ -165,7 +254,11 @@
 
         var formatUtil = echarts.format;
 
+<<<<<<< HEAD
         echarts
+=======
+        var treeChart = echarts
+>>>>>>> a18675184... metrics analysis
             .init(document.getElementById('treechart'))
             .setOption({
                 title: {
@@ -215,9 +308,22 @@
                                 }
                             }
                         ],
+<<<<<<< HEAD
                         data: metricsTree
                     }
                 ]
             });
+=======
+                        data: [metricsTree]
+                    }
+                ]
+            });
+
+        $(window).on('resize', function () {
+            if (treeChart) {
+                treeChart.resize();
+            }
+        });
+>>>>>>> a18675184... metrics analysis
     });
 })(jQuery);

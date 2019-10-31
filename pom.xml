@@ -193,6 +193,11 @@
         <artifactId>hamcrest-core</artifactId>
         <version>2.2</version>
       </dependency>
+      <dependency>
+        <groupId>org.ow2.asm</groupId>
+        <artifactId>asm</artifactId>
+        <version>7.2</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -377,11 +382,15 @@
       <version>${dashboard-view.version}</version>
       <optional>true</optional>
     </dependency>
+<<<<<<< HEAD
     <dependency>
       <groupId>io.jenkins.plugins</groupId>
       <artifactId>code-coverage-api</artifactId>
       <version>1.1.0</version>
     </dependency>
+=======
+    
+>>>>>>> a18675184... metrics analysis
 
     <!-- Test Dependencies -->
     <dependency>

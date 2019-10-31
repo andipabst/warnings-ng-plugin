@@ -12,11 +12,16 @@
       <issues:bootstrap-css/>
       <link rel="stylesheet" href="${resURL}/plugin/warnings-ng/css/datatables.min.css"/>
       <link rel="stylesheet" href="${resURL}/plugin/warnings-ng/css/custom-style.css"/>
+<<<<<<< HEAD
+=======
+      <link rel="stylesheet" href="${resURL}/plugin/warnings-ng/css/bootstrap-select.min.css"/>
+>>>>>>> a18675184... metrics analysis
       <issues:fontawesome-css/>
 
       <script src="${resURL}/plugin/warnings-ng/js/libs/jquery.min.js"/>
       <script src="${resURL}/plugin/warnings-ng/js/libs/popper.min.js"/>
       <script src="${resURL}/plugin/warnings-ng/js/libs/bootstrap.min.js"/>
+<<<<<<< HEAD
       <script src="${resURL}/plugin/warnings-ng/js/libs/datatables.min.js"/>
       <script src="${resURL}/plugin/warnings-ng/js/libs/echarts.min.js"/>
 
@@ -25,6 +30,21 @@
       </script>
       <script>
         var metricsTree = [${it.metricsTree}];
+=======
+      <script src="${resURL}/plugin/warnings-ng/js/libs/bootstrap-select.min.js"/>
+      <script src="${resURL}/plugin/warnings-ng/js/libs/datatables.min.js"/>
+      <script src="${resURL}/plugin/warnings-ng/js/libs/echarts.min.js"/>
+
+      <script type="text/javascript" src="${resURL}/plugin/warnings-ng/js/no-prototype.js"/>
+      <script src="${resURL}/plugin/warnings-ng/js/libs/math.min.js"/>
+      <script src="${resURL}/plugin/warnings-ng/js/libs/math.js"/>
+
+      <script>
+        var metrics = ${it.metrics};
+      </script>
+      <script>
+        var metricsTree = ${it.metricsTree};
+>>>>>>> a18675184... metrics analysis
       </script>
 
       <script src="${resURL}/plugin/warnings-ng/js/metrics.js"/>
@@ -35,6 +55,7 @@
 
         <h4>Lines of Code</h4>
 
+<<<<<<< HEAD
         <div id="treechart" style="width:800px; height:500px;"/>
         
         <hr/>
@@ -105,11 +126,50 @@
               </label>
             </div>
           </div>
+=======
+        <div id="treechart" style="width: 100%; min-height: 400px"/>
+
+        <hr/>
+        <hr/>
+        <hr/>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="table-filter">Filter</label>
+            <input type="text" class="form-control form-control-sm" id="table-filter"
+                   placeholder="LOC > 10 and ISSUES > 1"/>
+            <small class="form-text text-muted">
+              Variablen: ATFD, CLASS_FAN_OUT, LOC, NCSS, NOAM, NOPA, TCC, WMC, WOC, ISSUES
+            </small>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="column-picker">Select columns</label>
+            <select class="selectpicker form-control form-control-sm" multiple="true" id="column-picker">
+              <option value="metrics.ATFD" selected="true">Access to foreign data</option>
+              <option value="metrics.CLASS_FAN_OUT">Fan out</option>
+              <option value="metrics.LOC" selected="true">Lines of Code</option>
+              <option value="metrics.NCSS" selected="true">Non-comment</option>
+              <option value="metrics.NOAM">Accessor methods</option>
+              <option value="metrics.NOPA">Public Attributes</option>
+              <option value="metrics.TCC">Class cohesion</option>
+              <option value="metrics.WMC">W. method count</option>
+              <option value="metrics.WOC">Weight of class</option>
+              <option value="metrics.ISSUES" selected="true">Issues</option>
+            </select>
+          </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane">
+>>>>>>> a18675184... metrics analysis
           <div class="table-responsive">
             <table class="table table-hover table-striped display" id="lines-of-code">
               <thead>
                 <tr>
+<<<<<<< HEAD
                   <th></th>
+=======
+                  <th/>
+>>>>>>> a18675184... metrics analysis
                   <th>Package</th>
                   <th>Class</th>
                   <th>Access to foreign data</th>
@@ -121,6 +181,10 @@
                   <th>Class cohesion</th>
                   <th>W. method count</th>
                   <th>Weight of class</th>
+<<<<<<< HEAD
+=======
+                  <th>Issues</th>
+>>>>>>> a18675184... metrics analysis
                 </tr>
               </thead>
             </table>
@@ -137,6 +201,10 @@
         </ul>
 
         <h2>Issues</h2>
+<<<<<<< HEAD
+=======
+        ${it.displayName}
+>>>>>>> a18675184... metrics analysis
         <pre id="issues">
           ${it.issues}
         </pre>
@@ -146,6 +214,7 @@
           ${it.coverage}
         </pre>
 
+<<<<<<< HEAD
         <!--
         <j:set var="i" value="${it.issues}"/>
 
@@ -157,14 +226,19 @@
         </ul>
         -->
 
+=======
+>>>>>>> a18675184... metrics analysis
       </div>
 
       <script>var view =
         <st:bind value="${it}"/>
       </script>
 
+<<<<<<< HEAD
       <script type="text/javascript" src="${resURL}/plugin/warnings-ng/js/no-prototype.js"/>
 
+=======
+>>>>>>> a18675184... metrics analysis
     </l:main-panel>
 
   </issues:layout>

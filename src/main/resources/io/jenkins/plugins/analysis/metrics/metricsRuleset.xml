@@ -8,7 +8,11 @@
     Ruleset for reporting Metrics
   </description>
 
+<<<<<<< HEAD
   <rule name="MetricRule" language="java" class="io.jenkins.plugins.analysis.metrics.MetricRule">
+=======
+  <rule name="MetricRule" language="java" class="io.jenkins.plugins.metrics.model.PMDMetricRule">
+>>>>>>> a18675184... metrics analysis
     <description>
       Reports all available metrics
     </description>

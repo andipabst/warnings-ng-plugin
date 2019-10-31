@@ -28,7 +28,11 @@ class MetricsActorTest extends SerializableTest<MetricsActor> {
     @Test
     void shouldParseInnerClasses() {
         Path path = getResourceAsFile("Test.java");
+<<<<<<< HEAD
         MetricsMeasurements measurements = createScanner("Test.java")
+=======
+        MetricsReport measurements = createScanner("Test.java")
+>>>>>>> a18675184... metrics analysis
                 .invoke(path.getParent().toFile(), null);
 
         assertThat(measurements.size()).isEqualTo(9);
