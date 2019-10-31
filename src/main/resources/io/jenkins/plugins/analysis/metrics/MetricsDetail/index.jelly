@@ -1,0 +1,172 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout" xmlns:issues="/issues">
+
+  <st:header name="Content-Type" value="text/html;charset=UTF-8"/>
+
+  <issues:layout title="${it.displayName}" norefresh="true">
+
+    <st:include it="${it.owner}" page="sidepanel.jelly"/>
+
+    <l:main-panel>
+
+      <issues:bootstrap-css/>
+      <link rel="stylesheet" href="${resURL}/plugin/warnings-ng/css/datatables.min.css"/>
+      <link rel="stylesheet" href="${resURL}/plugin/warnings-ng/css/custom-style.css"/>
+      <issues:fontawesome-css/>
+
+      <script src="${resURL}/plugin/warnings-ng/js/libs/jquery.min.js"/>
+      <script src="${resURL}/plugin/warnings-ng/js/libs/popper.min.js"/>
+      <script src="${resURL}/plugin/warnings-ng/js/libs/bootstrap.min.js"/>
+      <script src="${resURL}/plugin/warnings-ng/js/libs/datatables.min.js"/>
+      <script src="${resURL}/plugin/warnings-ng/js/libs/echarts.min.js"/>
+
+      <script>
+        var metrics = [${it.metrics}];
+      </script>
+      <script>
+        var metricsTree = [${it.metricsTree}];
+      </script>
+
+      <script src="${resURL}/plugin/warnings-ng/js/metrics.js"/>
+
+      <div class="fluid-container">
+
+        <h3>${it.displayName}</h3>
+
+        <h4>Lines of Code</h4>
+
+        <div id="treechart" style="width:800px; height:500px;"/>
+        
+        <hr/>
+
+        <div role="tabpanel" class="tab-pane">
+          <div class="row">
+            <div class="form-check col-2">
+              <input class="form-check-input column-toggle" type="checkbox" id="columnToggle1" checked="true"
+                     data-column-id="metrics.ATFD"/>
+              <label class="form-check-label" for="columnToggle1">
+                Access to foreign data
+              </label>
+            </div>
+            <div class="form-check col-2">
+              <input class="form-check-input column-toggle" type="checkbox" id="columnToggle2" checked="true"
+                     data-column-id="metrics.CLASS_FAN_OUT"/>
+              <label class="form-check-label" for="columnToggle2">
+                Fan out
+              </label>
+            </div>
+            <div class="form-check col-2">
+              <input class="form-check-input column-toggle" type="checkbox" id="columnToggle3" checked="true"
+                     data-column-id="metrics.LOC"/>
+              <label class="form-check-label" for="columnToggle3">
+                Lines of Code
+              </label>
+            </div>
+            <div class="form-check col-2">
+              <input class="form-check-input column-toggle" type="checkbox" id="columnToggle4" checked="true"
+                     data-column-id="metrics.NCSS"/>
+              <label class="form-check-label" for="columnToggle4">
+                Non-comment
+              </label>
+            </div>
+            <div class="form-check col-2">
+              <input class="form-check-input column-toggle" type="checkbox" id="columnToggle5" checked="true"
+                     data-column-id="metrics.NOAM"/>
+              <label class="form-check-label" for="columnToggle5">
+                Accessor methods
+              </label>
+            </div>
+            <div class="form-check col-2">
+              <input class="form-check-input column-toggle" type="checkbox" id="columnToggle6" checked="true"
+                     data-column-id="metrics.NOPA"/>
+              <label class="form-check-label" for="columnToggle6">
+                Public attributes
+              </label>
+            </div>
+            <div class="form-check col-2">
+              <input class="form-check-input column-toggle" type="checkbox" id="columnToggle7" checked="true"
+                     data-column-id="metrics.TCC"/>
+              <label class="form-check-label" for="columnToggle7">
+                Class cohesion
+              </label>
+            </div>
+            <div class="form-check col-2">
+              <input class="form-check-input column-toggle" type="checkbox" id="columnToggle8" checked="true"
+                     data-column-id="metrics.WMC"/>
+              <label class="form-check-label" for="columnToggle8">
+                W. method count
+              </label>
+            </div>
+            <div class="form-check col-2">
+              <input class="form-check-input column-toggle" type="checkbox" id="columnToggle9" checked="true"
+                     data-column-id="metrics.WOC"/>
+              <label class="form-check-label" for="columnToggle9">
+                Weight of class
+              </label>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped display" id="lines-of-code">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Package</th>
+                  <th>Class</th>
+                  <th>Access to foreign data</th>
+                  <th>Fan out</th>
+                  <th>Lines of Code</th>
+                  <th>Non-comment</th>
+                  <th>Accessor methods</th>
+                  <th>Public attributes</th>
+                  <th>Class cohesion</th>
+                  <th>W. method count</th>
+                  <th>Weight of class</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+
+        <hr/>
+
+        Actions:
+        <ul>
+          <j:forEach var="action" items="${a}">
+            <li>${action}</li>
+          </j:forEach>
+        </ul>
+
+        <h2>Issues</h2>
+        <pre id="issues">
+          ${it.issues}
+        </pre>
+
+        <h2>Coverage</h2>
+        <pre id="coverage">
+          ${it.coverage}
+        </pre>
+
+        <!--
+        <j:set var="i" value="${it.issues}"/>
+
+        Issues:
+        <ul>
+          <j:forEach var="issue" items="${i}">
+            <li>${issue}</li>
+          </j:forEach>
+        </ul>
+        -->
+
+      </div>
+
+      <script>var view =
+        <st:bind value="${it}"/>
+      </script>
+
+      <script type="text/javascript" src="${resURL}/plugin/warnings-ng/js/no-prototype.js"/>
+
+    </l:main-panel>
+
+  </issues:layout>
+
+</j:jelly>
